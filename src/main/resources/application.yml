@@ -1,6 +1,0 @@
-spring:
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://mjutask-db.c5tjoxciejrk.ap-northeast-2.rds.amazonaws.com:3306/webpro
-        username: admin
-        password:
