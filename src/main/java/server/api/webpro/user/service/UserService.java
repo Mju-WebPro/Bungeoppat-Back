@@ -32,8 +32,3 @@ public class UserService {
         userRepository.delete(name);
     }
 }
-
-//        userRepository.save(User.builder()
-//                .name(request.getName())
-//                .age(request.getAge())
-//                .build());

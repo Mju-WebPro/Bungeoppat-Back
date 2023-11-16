@@ -3,14 +3,11 @@ package server.api.webpro.user.repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import server.api.webpro.user.dto.UserResponse;
-import server.api.webpro.user.dto.UserUpdateRequest;
 
 import java.util.List;
 
 @Repository
-@Transactional
 @RequiredArgsConstructor
 public class UserRepository  { //extends JpaRepository<User,Long>
     private final JdbcTemplate jdbcTemplate;
@@ -27,7 +24,7 @@ public class UserRepository  { //extends JpaRepository<User,Long>
     }
     public void update(String name,Long id){
         String sql = "update user set name=? where id=?";
-        jdbcTemplate.update(name, id);
+        jdbcTemplate.update(sql,name, id);
     }
     public void delete(String name){
         String sql = "delete from user where name=?";
