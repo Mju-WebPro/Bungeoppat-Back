@@ -2,10 +2,14 @@ package server.api.webpro.common.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
-import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 
 @OpenAPIDefinition(
         info = @Info(title = "Insurance App",
@@ -14,15 +18,20 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 @Configuration
 public class SwaggerConfig {
-
     @Bean
-    public GroupedOpenApi chatOpenApi() {
-        String[] paths = {"/server/app/insurance/*"};
+    public OpenAPI chatOpenApi() {
+        SecurityScheme bearerAuth = new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("Authorization")
+                .in(SecurityScheme.In.HEADER)
+                .name(HttpHeaders.AUTHORIZATION);
 
-        return GroupedOpenApi.builder()
-                .group("Insurance API v1")
-                .pathsToMatch(paths)
-                .build();
+        SecurityRequirement addSecurityItem = new SecurityRequirement();
+        addSecurityItem.addList("Authorization");
+
+        return new OpenAPI()
+                .components(new Components().addSecuritySchemes("Authorization", bearerAuth))
+                .addSecurityItem(addSecurityItem);
     }
-
 }

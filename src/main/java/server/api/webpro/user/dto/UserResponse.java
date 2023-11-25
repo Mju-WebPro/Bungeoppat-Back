@@ -11,11 +11,13 @@ import server.api.webpro.user.entity.User;
 public class UserResponse {
     private Long id;
     private String name;
+    private String email;
     private int age;
 
     public static UserResponse of(User user){
         return UserResponse.builder()
                 .name(user.getName())
+                .email(user.getEmail())
                 .age(user.getAge())
                 .build();
     }
