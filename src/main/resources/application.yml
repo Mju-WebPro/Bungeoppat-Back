@@ -4,12 +4,41 @@ spring:
         url: jdbc:mysql://localhost:3306/webpro
         username: root
         password: wodnd0131
+#        url: jdbc:mjutask-db.c5tjoxciejrk.ap-northeast-2.rds.amazonaws.com:3306/webpro
+#        username: admin
+#        password: mjutask0131
     jpa:
         hibernate:
-            ddl-auto: update
+            ddl-auto: create
     mvc:
         pathmatch:
             matching-strategy: ant_path_matcher
+    jwt:
+        secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LWp1bm8tc3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LWp1bm8tYXBwbGluZwo=
+        access-token-validity-in-seconds: 360000 #100시간
+        refresh-token-validity-in-seconds: 2592000 #30일
+        access:
+            expiration: 100
+            header: Authorization
+        refresh:
+            expiration: 200
+            header: Authorization-refresh
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id: 535321350238-hah6c37spl3eua2bujvvoug3ql237nns.apps.googleusercontent.com
+                        redirect-uri: http://localhost:8080/login/oauth2/code/google
+                        client-secret: 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
+                        client-name: Google
+                        scope:
+                            - email
+                            - profile
+    data:
+        redis:
+            host: 127.0.0.1
+            port: 6379
 springdoc:
     default-consumes-media-type: application/json
     default-produces-media-type: application/json
@@ -25,3 +54,4 @@ springdoc:
         doc-expansion: none # tag, operation 펼치는 방식
     paths-to-match:
         - /**
+
