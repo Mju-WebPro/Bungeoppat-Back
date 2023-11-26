@@ -2,6 +2,7 @@ package server.api.webpro.board.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import server.api.webpro.user.entity.User;
 
 import java.time.LocalDate;
 
@@ -17,8 +18,9 @@ public class Board {
     @Column(name = "boardId")
     private int boardId;
 
-    @Column(name = "userId")
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
     private String title;
     private LocalDate date;
