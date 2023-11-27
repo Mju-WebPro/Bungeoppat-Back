@@ -18,7 +18,7 @@ public class Board {
     @Column(name = "boardId")
     private int boardId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
 

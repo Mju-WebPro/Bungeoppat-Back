@@ -12,9 +12,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class BoardDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "boardId")
     private int boardId;
 
     private String title;
