@@ -1,9 +1,9 @@
-package server.api.webpro.FishShapedBun.service;
+package server.api.webpro.fishShapedBun.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import server.api.webpro.FishShapedBun.repository.FishShapedBunRepository;
-import server.api.webpro.storeUserReview.repository.StoreUserReviewRepository;
+import server.api.webpro.fishShapedBun.repository.FishShapedBunRepository;
+
 @Service
 @RequiredArgsConstructor
 public class FishShapedBunService {

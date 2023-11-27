@@ -1,4 +1,4 @@
-package server.api.webpro.FishShapedBun.entity;
+package server.api.webpro.fishShapedBun.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
