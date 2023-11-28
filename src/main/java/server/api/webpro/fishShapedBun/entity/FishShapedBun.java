@@ -2,6 +2,7 @@ package server.api.webpro.fishShapedBun.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import server.api.webpro.store.entity.Store;
 
 @Getter
 @Entity

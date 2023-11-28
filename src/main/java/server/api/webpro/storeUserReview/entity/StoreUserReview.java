@@ -3,6 +3,7 @@ package server.api.webpro.storeUserReview.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import server.api.webpro.review.entity.Review;
+import server.api.webpro.store.entity.Store;
 import server.api.webpro.user.entity.User;
 
 import java.time.LocalDateTime;
