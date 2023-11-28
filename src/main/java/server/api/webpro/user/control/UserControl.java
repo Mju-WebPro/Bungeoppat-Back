@@ -28,7 +28,7 @@ public class UserControl {
     return ApiResponse.of(UserResponseType.REGIST_SUCCESS);}
 
 
-    @GetMapping("/getUser")
+    @GetMapping("/v1/get-user")
     public ApiResponse<List<UserResponse>> retrieveAll() {
         return ApiResponse.of(UserResponseType.RETRIVE_SUCCESS
                 ,userService.getAllUser());}

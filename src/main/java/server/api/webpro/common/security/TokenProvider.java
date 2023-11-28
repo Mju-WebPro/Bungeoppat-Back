@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import server.api.webpro.common.exception.BizException;
+
 import server.api.webpro.common.security.service.CustomUserDetails;
 import server.api.webpro.user.dto.TokenInfoResponse;
 import server.api.webpro.user.entity.User;
@@ -24,7 +25,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
-import static server.api.webpro.user.state.UserResponseType.NOT_FOUND_EMAIL;
+
+import static server.api.webpro.user.state.UserResponseType.*;
+import static server.api.webpro.common.security.state.JwtException.*;
 @Component
 @RequiredArgsConstructor
 @Slf4j
@@ -108,17 +111,20 @@ public class TokenProvider implements InitializingBean {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            log.warn("잘못된 JWT 서명입니다.");
+            log.info("잘못된 JWT 서명입니다.");
+            throw new BizException(MAL_FORMED_TOKEN);
         } catch (ExpiredJwtException e) {
-            log.warn("만료된 JWT 토큰입니다.");
+            log.info("만료된 JWT 토큰입니다.");
+            throw new BizException(EXPIRED_TOKEN);
         } catch (UnsupportedJwtException e) {
-            log.warn("지원되지 않는 JWT 토큰입니다.");
+            log.info("지원되지 않는 JWT 토큰입니다.");
+            throw new BizException(UNSUPPORTED_TOKEN);
         } catch (IllegalArgumentException e) {
-            log.warn("JWT 토큰이 잘못되었습니다.");
+            log.info("JWT 토큰이 잘못되었습니다.");
+            throw new BizException(ILLEGAL_TOKEN);
         } catch(Exception e){
             log.info(e.getMessage());
-        }finally {
-            return false;
+            throw e;
         }
     }
 
