@@ -7,6 +7,5 @@ import server.api.webpro.storeUserReview.repository.StoreUserReviewRepository;
 @Service
 @RequiredArgsConstructor
 public class StoreUserReviewService {
-
     private final StoreUserReviewRepository storeUserReviewRepository;
 }
