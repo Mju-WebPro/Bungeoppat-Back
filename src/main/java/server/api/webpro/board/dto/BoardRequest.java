@@ -1,6 +1,5 @@
 package server.api.webpro.board.dto;
 
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -10,9 +9,10 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardDto {
+public class BoardRequest {
 
-    private int boardId;
+    private Long boardId;
+    private Long userId;
 
     private String title;
     private LocalDate date;
