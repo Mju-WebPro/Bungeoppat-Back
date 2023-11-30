@@ -17,6 +17,12 @@ configurations {
 	}
 }
 
+allprojects{
+	repositories{
+		maven { url 'https://jitpack.io'}
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -42,6 +48,8 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
 	testImplementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
+	implementation 'com.github.iamport:iamport-rest-client-java:0.2.21'
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
