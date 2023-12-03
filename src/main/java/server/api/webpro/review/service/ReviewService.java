@@ -2,7 +2,7 @@ package server.api.webpro.review.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import server.api.webpro.Order.dto.StatusContentResponse;
+import server.api.webpro.order.dto.StatusContentResponse;
 import server.api.webpro.review.dto.ReviewWriteRequest;
 import server.api.webpro.review.entity.Review;
 import server.api.webpro.review.repository.ReviewRepository;

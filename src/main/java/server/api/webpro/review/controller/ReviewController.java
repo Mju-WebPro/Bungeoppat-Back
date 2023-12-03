@@ -2,13 +2,12 @@ package server.api.webpro.review.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import server.api.webpro.Order.dto.StatusContentResponse;
+import server.api.webpro.order.dto.StatusContentResponse;
 import server.api.webpro.review.dto.ReviewWriteRequest;
 import server.api.webpro.review.service.ReviewService;
 

@@ -1,13 +1,13 @@
-package server.api.webpro.Order.service;
+package server.api.webpro.order.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import server.api.webpro.Order.dto.OrderCreateRequest;
-import server.api.webpro.Order.dto.OrderGetRequest;
-import server.api.webpro.Order.entity.Order;
-import server.api.webpro.Order.repository.OrderRepository;
-import server.api.webpro.Order.dto.StatusContentResponse;
-import server.api.webpro.Order.dto.OrderListResponse;
+import server.api.webpro.order.dto.OrderCreateRequest;
+import server.api.webpro.order.dto.OrderGetRequest;
+import server.api.webpro.order.entity.Order;
+import server.api.webpro.order.repository.OrderRepository;
+import server.api.webpro.order.dto.StatusContentResponse;
+import server.api.webpro.order.dto.OrderListResponse;
 import server.api.webpro.payment.entity.Payment;
 import server.api.webpro.payment.repository.PaymentRepository;
 import server.api.webpro.review.entity.Review;

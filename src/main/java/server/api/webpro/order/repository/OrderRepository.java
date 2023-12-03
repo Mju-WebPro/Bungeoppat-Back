@@ -1,10 +1,10 @@
-package server.api.webpro.Order.repository;
+package server.api.webpro.order.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import server.api.webpro.Order.entity.Order;
+import server.api.webpro.order.entity.Order;
 import server.api.webpro.user.entity.User;
 
 import java.util.List;

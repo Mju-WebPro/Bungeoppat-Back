@@ -1,4 +1,4 @@
-package server.api.webpro.Order.entity;
+package server.api.webpro.order.entity;
 
 import java.io.Serializable;
 
