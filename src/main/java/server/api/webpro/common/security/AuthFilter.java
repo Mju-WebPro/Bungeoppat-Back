@@ -19,7 +19,6 @@ import java.io.IOException;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static server.api.webpro.common.security.state.JwtException.*;
-@Slf4j
 @RequiredArgsConstructor
 public class AuthFilter extends OncePerRequestFilter {
     private final String BEARER_PREFIX = "Bearer ";
@@ -35,7 +34,6 @@ public class AuthFilter extends OncePerRequestFilter {
                 if (isAdditionalInfoProvided) {
                     Authentication authentication = tokenProvider.getAuthentication(jwt);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
-                    log.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
                 } else {
                     throw new BizException(ADDITIONAL_REQUIRED_TOKEN);
                 }
@@ -52,15 +50,6 @@ public class AuthFilter extends OncePerRequestFilter {
         } catch (UnsupportedJwtException e ) {
             request.setAttribute("exception", UNSUPPORTED_TOKEN.getCode());
         } catch (Exception e) {
-            // 에러 처리 로직 추가
-            log.error("================================================");
-            log.error("JwtFilter - doFilterInternal() 오류발생");
-            log.error("token : {}", jwt);
-            log.error("Exception Message : {}", e.getMessage());
-            log.error("Exception StackTrace : {");
-            e.printStackTrace();
-            log.error("}");
-            log.error("================================================");
             request.setAttribute("exception", UNKNOWN_ERROR.getCode());
         }
         filterChain.doFilter(request, response);
@@ -68,7 +57,6 @@ public class AuthFilter extends OncePerRequestFilter {
 
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION);
-        log.debug(bearerToken);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(BEARER_PREFIX.length());
         }

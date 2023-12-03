@@ -14,11 +14,9 @@ import server.api.webpro.user.state.Role;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "User_ID")
+    @Column(name = "user_id")
     private Long id;
     private String email;
     private String name;
     private Integer age;
-    @Enumerated(EnumType.STRING)
-    private Role role;
 }
