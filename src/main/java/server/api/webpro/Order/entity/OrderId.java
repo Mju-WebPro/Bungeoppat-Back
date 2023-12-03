@@ -1,11 +1,12 @@
-package server.api.webpro.storeUserReview.entity;
+package server.api.webpro.Order.entity;
 
 import java.io.Serializable;
 
-public class StoreUserReviewId implements Serializable {
+public class OrderId implements Serializable {
     private Long storeId;
     private Long userId;
     private Long reviewId;
+    private Long paymentId;
 
     @Override
     public int hashCode(){

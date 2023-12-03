@@ -2,9 +2,8 @@ package server.api.webpro.store.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import server.api.webpro.storeUserReview.entity.StoreUserReview;
+import server.api.webpro.Order.entity.Order;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -20,5 +19,5 @@ public class Store {
     private Long openingHours;
 
     @OneToMany(mappedBy = "storeId", cascade = CascadeType.ALL)
-    private List<StoreUserReview> storeUserReviews;
+    private List<Order> orders;
 }
