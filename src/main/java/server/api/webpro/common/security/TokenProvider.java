@@ -30,7 +30,6 @@ import static server.api.webpro.user.state.UserResponseType.*;
 import static server.api.webpro.common.security.state.JwtException.*;
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class TokenProvider implements InitializingBean {
 
 
@@ -111,19 +110,14 @@ public class TokenProvider implements InitializingBean {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            log.info("잘못된 JWT 서명입니다.");
             throw new BizException(MAL_FORMED_TOKEN);
         } catch (ExpiredJwtException e) {
-            log.info("만료된 JWT 토큰입니다.");
             throw new BizException(EXPIRED_TOKEN);
         } catch (UnsupportedJwtException e) {
-            log.info("지원되지 않는 JWT 토큰입니다.");
             throw new BizException(UNSUPPORTED_TOKEN);
         } catch (IllegalArgumentException e) {
-            log.info("JWT 토큰이 잘못되었습니다.");
             throw new BizException(ILLEGAL_TOKEN);
         } catch(Exception e){
-            log.info(e.getMessage());
             throw e;
         }
     }

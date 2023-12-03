@@ -7,5 +7,5 @@ import server.api.webpro.review.service.ReviewService;
 @RestController
 @RequiredArgsConstructor
 public class StoreControl {
-    private final StoreControl storeControl;
+//    private final StoreControl storeControl;
 }
