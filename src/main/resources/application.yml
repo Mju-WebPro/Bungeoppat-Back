@@ -55,3 +55,9 @@ springdoc:
     paths-to-match:
         - /**
 
+imp:
+    code: imp26662343
+
+    api:
+        key: 6253657173615713
+        secretkey: gnEeycSMuHapzP4B1PiDJtSUTFk6jW6dKz8fb99kvIyF5cMlJsSj4PFNC4judYDKvJEA12UYIeuGR8bU

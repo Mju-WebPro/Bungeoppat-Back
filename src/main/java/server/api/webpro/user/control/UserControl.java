@@ -22,26 +22,30 @@ import java.util.List;
 public class UserControl {
     private final UserService userService;
     private final UserAuthService userAuthService;
+
     @PostMapping("/regist")
     public ApiResponse<String> saveUser(@RequestBody UserCreateRequest userCreateRequest) {
         userService.saveUser(userCreateRequest);
-    return ApiResponse.of(UserResponseType.REGIST_SUCCESS);}
+        return ApiResponse.of(UserResponseType.REGIST_SUCCESS);
+    }
 
 
     @GetMapping("/v1/get-user")
     public ApiResponse<List<UserResponse>> retrieveAll() {
         return ApiResponse.of(UserResponseType.RETRIVE_SUCCESS
-                ,userService.getAllUser());}
+                , userService.getAllUser());
+    }
 
     @Operation(summary = "구글 연동 로그인 및 계정 등록", description = " https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email&response_type=code&redirect_uri=http://localhost:8080/login/oauth2/code/google&client_id=535321350238-hah6c37spl3eua2bujvvoug3ql237nns.apps.googleusercontent.com")
     @PostMapping(value = {"/login/oauth2/code/google"})
-    public ApiResponse<Object> googleLogin( @RequestParam String token) {
+    public ApiResponse<Object> googleLogin(@RequestParam String token) {
         log.info(token);
         return ApiResponse.of(UserResponseType.LOGIN_SUCCESS,
                 userAuthService.login(token));
     }
+
     @GetMapping(value = {"/login/oauth2/code/google"})
-    public ApiResponse<Object> callBack(@RequestParam String code){
+    public ApiResponse<Object> callBack(@RequestParam String code) {
         log.info(code);
         return ApiResponse.of(UserResponseType.LOGIN_SUCCESS,
                 userAuthService.getAccessToken(code));
