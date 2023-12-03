@@ -1,16 +1,13 @@
 package server.api.webpro.payment.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Getter
 @Entity
 @Table(name = "Payment")
 public class Payment {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "payment_id")
     private Long id;
 
