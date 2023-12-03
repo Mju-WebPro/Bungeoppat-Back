@@ -1,14 +1,14 @@
-package server.api.webpro.Order.controller;
+package server.api.webpro.order.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import server.api.webpro.Order.dto.OrderCreateRequest;
-import server.api.webpro.Order.dto.OrderGetRequest;
-import server.api.webpro.Order.service.OrderService;
-import server.api.webpro.Order.dto.StatusContentResponse;
-import server.api.webpro.Order.dto.OrderListResponse;
+import server.api.webpro.order.dto.OrderCreateRequest;
+import server.api.webpro.order.dto.OrderGetRequest;
+import server.api.webpro.order.service.OrderService;
+import server.api.webpro.order.dto.StatusContentResponse;
+import server.api.webpro.order.dto.OrderListResponse;
 
 @RestController
 @RequestMapping("/order")

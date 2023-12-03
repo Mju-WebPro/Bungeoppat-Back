@@ -1,4 +1,4 @@
-package server.api.webpro.Order.entity;
+package server.api.webpro.order.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import server.api.webpro.review.entity.Review;
 import server.api.webpro.store.entity.Store;
 import server.api.webpro.user.entity.User;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
