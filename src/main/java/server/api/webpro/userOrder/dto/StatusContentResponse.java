@@ -1,4 +1,4 @@
-package server.api.webpro.order.dto;
+package server.api.webpro.userOrder.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

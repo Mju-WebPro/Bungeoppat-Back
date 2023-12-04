@@ -1,8 +1,8 @@
-package server.api.webpro.order.entity;
+package server.api.webpro.userOrder.entity;
 
 import java.io.Serializable;
 
-public class OrderId implements Serializable {
+public class UserOrderId implements Serializable {
     private Long storeId;
     private Long userId;
     private Long reviewId;

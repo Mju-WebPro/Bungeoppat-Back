@@ -1,5 +1,4 @@
-package server.api.webpro.order.entity;
-
+package server.api.webpro.userOrder.entity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,9 +13,9 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "Order")
-@IdClass(OrderId.class)
-public class Order {
+@Table(name = "userOrder")
+@IdClass(UserOrderId.class)
+public class UserOrder {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Store_id")
@@ -51,7 +50,7 @@ public class Order {
     private Integer status;
 
     @Builder
-    public Order(Store storeId, User userId, Review reviewId, Payment paymentId, Integer quantity, Integer price,
+    public UserOrder(Store storeId, User userId, Review reviewId, Payment paymentId, Integer quantity, Integer price,
                  LocalDateTime purchaseDate, Integer pickUpMinute, Integer status){
         this.storeId = storeId;
         this.userId = userId;
