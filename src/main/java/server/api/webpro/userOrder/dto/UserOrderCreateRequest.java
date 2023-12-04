@@ -1,11 +1,11 @@
-package server.api.webpro.order.dto;
+package server.api.webpro.userOrder.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
 @NotNull
-public class OrderCreateRequest {
+public class UserOrderCreateRequest {
     @NotNull
     private Long storeId;
     @NotNull

@@ -2,7 +2,7 @@ package server.api.webpro.store.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import server.api.webpro.order.entity.Order;
+import server.api.webpro.userOrder.entity.UserOrder;
 
 import java.util.List;
 
@@ -19,5 +19,5 @@ public class Store {
     private Long openingHours;
 
     @OneToMany(mappedBy = "storeId", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    private List<UserOrder> orders;
 }

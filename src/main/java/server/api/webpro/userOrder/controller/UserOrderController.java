@@ -1,25 +1,25 @@
-package server.api.webpro.order.controller;
+package server.api.webpro.userOrder.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import server.api.webpro.order.dto.OrderCreateRequest;
-import server.api.webpro.order.dto.OrderGetRequest;
-import server.api.webpro.order.service.OrderService;
-import server.api.webpro.order.dto.StatusContentResponse;
-import server.api.webpro.order.dto.OrderListResponse;
+import server.api.webpro.userOrder.dto.UserOrderCreateRequest;
+import server.api.webpro.userOrder.dto.UserOrderGetRequest;
+import server.api.webpro.userOrder.service.UserOrderService;
+import server.api.webpro.userOrder.dto.StatusContentResponse;
+import server.api.webpro.userOrder.dto.UserOrderListResponse;
 
 @RestController
 @RequestMapping("/order")
 @RequiredArgsConstructor
 @Slf4j
-public class OrderController {
+public class UserOrderController {
 
-    private final OrderService orderService;
+    private final UserOrderService orderService;
 
     @PostMapping()
-    public ResponseEntity<StatusContentResponse> createOrder(@RequestBody OrderCreateRequest request){
+    public ResponseEntity<StatusContentResponse> createOrder(@RequestBody UserOrderCreateRequest request){
         log.info("createOrder : storeId = {}, userId = {}, reviewId = {}, paymentId = {}, quantity = {}, price = {}",
                 request.getStoreId(), request.getUserId(), request.getReviewId(), request.getPaymentId(),
                 request.getQuantity(), request.getPrice());
@@ -28,9 +28,9 @@ public class OrderController {
     }
 
     @GetMapping()
-    public ResponseEntity<OrderListResponse> getAllOrders(@RequestBody OrderGetRequest request){
+    public ResponseEntity<UserOrderListResponse> getAllOrders(@RequestBody UserOrderGetRequest request){
         log.info("getAllOrders : userId = {} ", request.getUserId());
-        OrderListResponse response = orderService.getAllOrders(request);
+        UserOrderListResponse response = orderService.getAllOrders(request);
         return ResponseEntity.ok(response);
     }
 }
