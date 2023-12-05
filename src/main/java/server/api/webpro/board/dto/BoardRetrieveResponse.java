@@ -22,7 +22,7 @@ public class BoardRetrieveResponse {
 
     public static BoardRetrieveResponse of(Board board) {
         return BoardRetrieveResponse.builder()
-                .boardId(board.getBoardId())
+                .boardId(board.getId())
                 .userId(board.getUser().getId())
                 .title(board.getTitle())
                 .date(board.getDate())
