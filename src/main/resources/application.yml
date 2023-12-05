@@ -3,7 +3,7 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/webpro
         username: root
-        password:
+        password: tlarbckd@17
 #        url: jdbc:mjutask-db.c5tjoxciejrk.ap-northeast-2.rds.amazonaws.com:3306/webpro
 #        username: admin
 #        password: mjutask0131
@@ -56,13 +56,13 @@ springdoc:
         - /**
 cloud:
     aws:
-        s3:
-            bucket: mjuwebpro
         credentials:
             access-key: AKIAQAZLIF42DINNIX6L
             secret-key: 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
+        s3:
+            bucket: mjuwebpro
         region:
-            static: ap-northeast-2
+            static: ap-southeast-2
             auto: false
         stack:
             auto: false
