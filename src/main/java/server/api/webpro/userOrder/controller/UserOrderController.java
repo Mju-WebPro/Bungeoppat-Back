@@ -16,21 +16,21 @@ import server.api.webpro.userOrder.dto.UserOrderListResponse;
 @Slf4j
 public class UserOrderController {
 
-    private final UserOrderService orderService;
+    private final UserOrderService userOrderService;
 
     @PostMapping()
     public ResponseEntity<StatusContentResponse> createOrder(@RequestBody UserOrderCreateRequest request){
         log.info("createOrder : storeId = {}, userId = {}, reviewId = {}, paymentId = {}, quantity = {}, price = {}",
                 request.getStoreId(), request.getUserId(), request.getReviewId(), request.getPaymentId(),
                 request.getQuantity(), request.getPrice());
-        StatusContentResponse response = orderService.createOrder(request);
+        StatusContentResponse response = userOrderService.createOrder(request);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping()
     public ResponseEntity<UserOrderListResponse> getAllOrders(@RequestBody UserOrderGetRequest request){
         log.info("getAllOrders : userId = {} ", request.getUserId());
-        UserOrderListResponse response = orderService.getAllOrders(request);
+        UserOrderListResponse response = userOrderService.getAllOrders(request);
         return ResponseEntity.ok(response);
     }
 }
