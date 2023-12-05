@@ -1,7 +1,6 @@
 package server.api.webpro.common.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.http.HttpStatus;
@@ -23,7 +22,7 @@ import java.util.List;
 public class CustomEntryPoint implements AuthenticationEntryPoint {
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         List<ErrorDto> errors = new ArrayList<>();
         errors.add(ErrorDto.builder().point("ACCESS TOKEN / REFRESH TOKEN").detail("please check request token").build());
 
