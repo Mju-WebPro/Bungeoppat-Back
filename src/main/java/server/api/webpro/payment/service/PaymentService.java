@@ -16,7 +16,7 @@ public class PaymentService {
 
     public StatusContentResponse createPayment(PaymentCreateRequest request){
         Payment payment = Payment.builder()
-                .paidAmount(request.getPayAmount())
+                .paidAmount(request.getPaidAmount())
                 .payMethod(request.getPayMethod())
                 .status(request.getStatus())
                 .impUid(request.getImpUid())

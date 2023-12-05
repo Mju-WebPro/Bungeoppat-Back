@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class PaymentCreateRequest {
-    private Long payAmount;
+    private Long paidAmount;
     private String payMethod;
     private String status;
     private String impUid;

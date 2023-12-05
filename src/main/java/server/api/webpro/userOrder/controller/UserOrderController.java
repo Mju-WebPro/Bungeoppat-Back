@@ -11,7 +11,7 @@ import server.api.webpro.userOrder.dto.StatusContentResponse;
 import server.api.webpro.userOrder.dto.UserOrderListResponse;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/userOrder")
 @RequiredArgsConstructor
 @Slf4j
 public class UserOrderController {
