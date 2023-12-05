@@ -13,20 +13,20 @@ import server.api.webpro.review.service.ReviewService;
 
 @RestController
 @RequestMapping("/review")
-@Slf4j
+//@Slf4j
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewService reviewService;
     @PostMapping()
     public ResponseEntity<StatusContentResponse> createReview(){
-        log.info("createReview");
+//        log.info("createReview");
         StatusContentResponse response = reviewService.createReview();
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/write")
     public ResponseEntity<StatusContentResponse> writeReview(@RequestBody ReviewWriteRequest request){
-        log.info("writeReview : id = {}, content = {}, starRating = {}");
+//        log.info("writeReview : id = {}, content = {}, starRating = {}");
         StatusContentResponse response = reviewService.writeReview(request);
         return ResponseEntity.ok(response);
     }
