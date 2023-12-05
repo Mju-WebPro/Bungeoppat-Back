@@ -54,4 +54,15 @@ springdoc:
         doc-expansion: none # tag, operation 펼치는 방식
     paths-to-match:
         - /**
-
+cloud:
+    aws:
+        s3:
+            bucket: mjuwebpro
+        credentials:
+            access-key: AKIAQAZLIF42DINNIX6L
+            secret-key: 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
+        region:
+            static: ap-northeast-2
+            auto: false
+        stack:
+            auto: false

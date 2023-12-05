@@ -15,11 +15,11 @@ import java.time.LocalDate;
 public class Board {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "boardId")
-    private int boardId;
+    @Column(name = "board_id")
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     private String title;
