@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import server.api.webpro.common.security.util.SecurityUtils;
 import server.api.webpro.user.dto.*;
 import server.api.webpro.user.entity.User;
 import server.api.webpro.user.repository.UserRepository;
@@ -28,4 +29,14 @@ public class UserService {
     public List<UserResponse> getAllUser() {return userRepository.findAll().stream().map(UserResponse::of).collect(Collectors.toList());}
 
 
+    public MyIdResponse myId() {
+        Long memberId = SecurityUtils.getLoggedInUser().getId();
+        User user = userRepository.findById(memberId).orElseThrow();
+
+        return MyIdResponse.builder()
+                .id(user.getId())
+                .nickName(user.getName())
+                .email(user.getEmail())
+                .build();
+    }
 }

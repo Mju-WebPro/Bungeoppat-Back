@@ -1,4 +1,4 @@
-package server.api.webpro.board.control;
+package server.api.webpro.board.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

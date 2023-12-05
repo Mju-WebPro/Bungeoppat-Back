@@ -1,4 +1,4 @@
-package server.api.webpro.user.control;
+package server.api.webpro.user.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -6,20 +6,21 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import server.api.webpro.common.utill.ApiResponse;
+import server.api.webpro.user.dto.MyIdResponse;
 import server.api.webpro.user.dto.UserCreateRequest;
 import server.api.webpro.user.dto.UserResponse;
-import server.api.webpro.user.dto.UserUpdateRequest;
 import server.api.webpro.user.service.UserAuthService;
 import server.api.webpro.user.service.UserService;
 import server.api.webpro.user.state.UserResponseType;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "User 컨트롤러", description = "User API입니다.")
 @Slf4j
-public class UserControl {
+public class UserController {
     private final UserService userService;
     private final UserAuthService userAuthService;
 
@@ -50,5 +51,9 @@ public class UserControl {
         return ApiResponse.of(UserResponseType.LOGIN_SUCCESS,
                 userAuthService.getAccessToken(code));
     }
+
+    @GetMapping(value = {"/myid"})
+    public ApiResponse<MyIdResponse> myId() throws ParseException {
+        return ApiResponse.of(UserResponseType.MYPAGE_LOAD_SUCCESS, userService.myId());
 
 }
