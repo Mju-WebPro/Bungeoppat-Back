@@ -13,6 +13,8 @@ public enum UserResponseType implements BaseResponseType {
     RETRIVE_SUCCESS(20003, "고객 정보 불러오기 성공", HttpStatus.OK),
     UPDATE_SUCCESS(20004, "고객 정보 업데이트 성공", HttpStatus.OK),
     DELETE_SUCCESS(20005, "고객 정보 삭제 성공", HttpStatus.OK),
+    MYPAGE_LOAD_SUCCESS(20006, "마이페이지 정보 조회 완료", HttpStatus.OK),
+
 
     SIGN_UP_ING(40003,"회원가입 진행중", HttpStatus.BAD_REQUEST),
 

@@ -26,14 +26,14 @@ public class SecurityConfig {
         http
                 .csrf(c -> c.disable())
                 .cors(c -> c.disable())
+                .formLogin(c -> c.disable())
+                .httpBasic(c -> c.disable())
+                .sessionManagement(c->c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(c -> c.frameOptions(f -> f.disable()).disable())
                 .authorizeHttpRequests(auth -> {
                     try{auth
                                 .requestMatchers("/", "/auth/**","login/oauth2/code/google").permitAll()
                                 .requestMatchers( "/swagger-ui/**","/v3/**").permitAll()
-                                .requestMatchers( "/swagger-ui/**","/v3/**").permitAll()
-                                .requestMatchers("/v1/**", "/api/v1/**").hasRole("USER")
-                                .requestMatchers("/v2/**", "/api/v2/**").hasRole("ADMIN")
                                 .anyRequest().permitAll()
                         ;
                     }catch (Exception e){
