@@ -31,7 +31,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/v1/get-user")
+    @GetMapping("/user/retrieveAll")
     public ApiResponse<List<UserResponse>> retrieveAll() {
         return ApiResponse.of(UserResponseType.RETRIVE_SUCCESS
                 , userService.getAllUser());
@@ -55,5 +55,5 @@ public class UserController {
     @GetMapping(value = {"/myid"})
     public ApiResponse<MyIdResponse> myId() throws ParseException {
         return ApiResponse.of(UserResponseType.MYPAGE_LOAD_SUCCESS, userService.myId());
-
+    }
 }
