@@ -9,15 +9,15 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Store {
+public class Place {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_Id")
+    @Column(name = "place_Id")
     private Long id;
 
-    private String storeName;
-    private String operateTime;
-    private String menu;
+    private String placeName;
+    private double latitude;
+    private double longitude;
 
 }
