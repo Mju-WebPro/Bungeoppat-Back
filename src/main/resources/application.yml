@@ -4,8 +4,8 @@ spring:
         url: jdbc:mysql://localhost:3306/webpro
         username: root
         password: wodnd0131
-#        url: jdbc:mjutask-db.c5tjoxciejrk.ap-northeast-2.rds.amazonaws.com:3306/webpro
-#        username: admin
+#        url: jdbc:mysql://mjutask-db.c5tjoxciejrk.ap-northeast-2.rds.amazonaws.com:3306/mju_db
+#        username: root
 #        password: mjutask0131
     jpa:
         hibernate:
