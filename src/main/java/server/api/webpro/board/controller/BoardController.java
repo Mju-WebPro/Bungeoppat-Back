@@ -3,10 +3,7 @@ package server.api.webpro.board.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import server.api.webpro.board.dto.BoardDto;
-import server.api.webpro.board.dto.BoardRequest;
-import server.api.webpro.board.dto.BoardRetrieveResponse;
-import server.api.webpro.board.dto.BoardUpdateRequest;
+import server.api.webpro.board.dto.*;
 import server.api.webpro.board.entity.Board;
 import server.api.webpro.board.service.BoardService;
 import server.api.webpro.board.state.BoardResponseType;
@@ -21,18 +18,18 @@ public class BoardController {
 
     private final BoardService boardService;
 
+
     @PostMapping("/board")
-    private ApiResponse<Object> createBoard(@RequestPart("boardRequest") BoardRequest boardRequest,
-                                            @RequestPart("multipartFile") MultipartFile multipartFile) throws IOException {
-        boardService.createBoard(boardRequest, multipartFile);
+    public ApiResponse<Object> createBoard(@RequestBody BoardRequest boardRequest) {
+        boardService.createBoard(boardRequest);
         return ApiResponse.of(BoardResponseType.CREATE_SUCCESS);
     }
 
-    @PostMapping("/board/notImage")
-    public ApiResponse<Object> createBoardNotImage(@RequestBody BoardRequest boardRequest) {
-        boardService.createBoardNotImage(boardRequest);
-        return ApiResponse.of(BoardResponseType.CREATE_SUCCESS);
-    }
+//    @PostMapping("/board/reply")
+//    public ApiResponse<Object> createReply(@RequestBody ReplyRequest replyRequest) {
+//        boardService.createReply(replyRequest);
+//        return ApiResponse.of(BoardResponseType.REPLY_SUCCESS);
+//    }
 
     @GetMapping("/board/all")
     public ApiResponse<List<BoardRetrieveResponse>> retrieveAllBoard() {
@@ -46,7 +43,7 @@ public class BoardController {
 
     @PutMapping("/board/{board_id}")
     private ApiResponse<Object> updateBoard(@PathVariable(value = "board_id") Long id,
-                                            @ModelAttribute BoardUpdateRequest boardUpdateRequest) throws IOException {
+                                            @ModelAttribute BoardUpdateRequest boardUpdateRequest) {
         boardService.updateBoard(id, boardUpdateRequest);
         return ApiResponse.of(BoardResponseType.UPDATE_SUCCESS);
     }
