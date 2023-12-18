@@ -43,6 +43,17 @@ public class Board {
                 .build();
     }
 
+    public static Board notImage(BoardRequest boardRequest, User boardUser) {
+        return Board.builder()
+                .user(boardUser)
+                .title(boardRequest.getTitle())
+                .date(LocalDate.now())
+                .content(boardRequest.getContent())
+                .fileName("NONE")
+                .imageUrl("NONE")
+                .build();
+    }
+
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
