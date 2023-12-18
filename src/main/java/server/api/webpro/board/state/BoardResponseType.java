@@ -10,8 +10,10 @@ import server.api.webpro.common.utill.BaseResponseType;
 public enum BoardResponseType implements BaseResponseType {
 
     CREATE_SUCCESS(200, "게시판 생성 성공", HttpStatus.OK),
-    RETRIEVE_ALL(200, "게시판 전체 조회 성공", HttpStatus.OK),
-    UPDATE_SUCCESS(200, "게시판 수정 성공", HttpStatus.OK);
+    RETRIEVEALL_SUCCESS(200, "게시판 전체 조회 성공", HttpStatus.OK),
+    UPDATE_SUCCESS(200, "게시판 수정 성공", HttpStatus.OK),
+    RETRIEVEBYID_SUCCESS(200, "게시판 조회 성공 By ID", HttpStatus.OK),
+    DELETE_SUCCESS(200, "게시판 삭제 성공", HttpStatus.OK);
 
     private final Integer code;
     private final String message;

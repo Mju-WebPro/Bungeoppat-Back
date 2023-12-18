@@ -5,4 +5,5 @@ import server.api.webpro.board.entity.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
+    Board findByTitle(String title);
 }

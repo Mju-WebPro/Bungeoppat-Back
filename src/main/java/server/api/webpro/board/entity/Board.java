@@ -2,7 +2,9 @@ package server.api.webpro.board.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 import server.api.webpro.board.dto.BoardDto;
+import server.api.webpro.board.dto.BoardRequest;
 import server.api.webpro.user.entity.User;
 
 import java.time.LocalDate;
@@ -17,7 +19,7 @@ public class Board {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "board_id")
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -27,14 +29,26 @@ public class Board {
     private LocalDate date;
     private String content;
 
+    private String fileName;
     private String imageUrl;
 
-    public static Board of(BoardDto boardDto, String imageUrl) {
+    public static Board of(BoardRequest boardRequest, MultipartFile multipartFile, String imageUrl, User boardUser) {
         return Board.builder()
-                .title(boardDto.getTitle())
+                .user(boardUser)
+                .title(boardRequest.getTitle())
                 .date(LocalDate.now())
-                .content(boardDto.getContent())
+                .content(boardRequest.getContent())
+                .fileName(multipartFile.getOriginalFilename())
                 .imageUrl(imageUrl)
                 .build();
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public void updateImage(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

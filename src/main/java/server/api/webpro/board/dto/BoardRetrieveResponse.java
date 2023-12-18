@@ -17,7 +17,7 @@ public class BoardRetrieveResponse {
 
     private String title;
     private LocalDate date;
-    private String picture;
+    private String imageUrl;
     private String content;
 
     public static BoardRetrieveResponse of(Board board) {
@@ -26,7 +26,7 @@ public class BoardRetrieveResponse {
                 .userId(board.getUser().getId())
                 .title(board.getTitle())
                 .date(board.getDate())
-                .picture(board.getPicture())
+                .imageUrl(board.getImageUrl())
                 .content(board.getContent())
                 .build();
     }
