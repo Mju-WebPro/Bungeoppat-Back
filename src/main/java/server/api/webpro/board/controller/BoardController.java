@@ -16,16 +16,21 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
 
     private final BoardService boardService;
 
     @PostMapping("/board")
-    private ApiResponse<Object> createBoard(@RequestBody BoardRequest boardRequest,
-                                            @RequestParam("multipartFile") MultipartFile multipartFile) throws IOException {
+    private ApiResponse<Object> createBoard(@RequestPart("boardRequest") BoardRequest boardRequest,
+                                            @RequestPart("multipartFile") MultipartFile multipartFile) throws IOException {
         boardService.createBoard(boardRequest, multipartFile);
+        return ApiResponse.of(BoardResponseType.CREATE_SUCCESS);
+    }
+
+    @PostMapping("/board/notImage")
+    public ApiResponse<Object> createBoardNotImage(@RequestBody BoardRequest boardRequest) {
+        boardService.createBoardNotImage(boardRequest);
         return ApiResponse.of(BoardResponseType.CREATE_SUCCESS);
     }
 

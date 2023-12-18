@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class BoardService {
 
@@ -28,12 +29,17 @@ public class BoardService {
     private final UserService userService;
     private final S3UploadService s3UploadService;
 
-    @Transactional
     public void createBoard(BoardRequest boardRequest, MultipartFile multipartFile) throws IOException {
         checkDuplicateBoard(boardRequest);
         String imageUrl = s3UploadService.saveFile(multipartFile);
         User boardUser = userService.getUserById(boardRequest.getUserId());
         boardRepository.save(Board.of(boardRequest, multipartFile, imageUrl, boardUser));
+    }
+
+    public void createBoardNotImage(BoardRequest boardRequest) {
+        checkDuplicateBoard(boardRequest);
+        User boardUser = userService.getUserById(boardRequest.getUserId());
+        boardRepository.save(Board.notImage(boardRequest, boardUser));
     }
 
     public List<BoardRetrieveResponse> retrieveBoard() {
