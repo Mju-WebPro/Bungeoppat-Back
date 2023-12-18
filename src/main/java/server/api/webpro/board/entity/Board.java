@@ -2,6 +2,8 @@ package server.api.webpro.board.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
+import server.api.webpro.board.dto.BoardDto;
 import server.api.webpro.board.dto.BoardRequest;
 import server.api.webpro.user.entity.User;
 
@@ -25,19 +27,28 @@ public class Board {
 
     private String title;
     private LocalDate date;
-    // 이미지 주소로 저장(반환할 때 사용할 주소)
-    private String picture;
     private String content;
 
+    private String fileName;
+    private String imageUrl;
 
-    public static Board of(BoardRequest boardRequest, User writer) {
+    public static Board of(BoardRequest boardRequest, MultipartFile multipartFile, String imageUrl, User boardUser) {
         return Board.builder()
-                .id(boardRequest.getBoardId())
-                .user(writer)
+                .user(boardUser)
                 .title(boardRequest.getTitle())
                 .date(LocalDate.now())
-                .picture(boardRequest.getPicture())
                 .content(boardRequest.getContent())
+                .fileName(multipartFile.getOriginalFilename())
+                .imageUrl(imageUrl)
                 .build();
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public void updateImage(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -39,4 +39,8 @@ public class UserService {
                 .email(user.getEmail())
                 .build();
     }
+
+    public User getUserById(Long userId) {
+        return userRepository.getReferenceById(userId);
+    }
 }
