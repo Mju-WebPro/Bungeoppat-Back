@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map Display with Search</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map { height: 400px; }
+    </style>
+</head>
+<body>
+<div>
+    <input type="text" id="searchInput" placeholder="장소 검색">
+    <button onclick="searchPlaces()">검색</button>
+</div>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([37.5665, 126.9780], 13); // 초기 좌표 및 줌 레벨
+    var markerGroup = L.layerGroup().addTo(map); // 마커들을 그룹화할 레이어
+
+    function searchPlaces() {
+        var keyword = document.getElementById('searchInput').value; // 검색어 입력
+
+        // 백엔드 API 호출
+        fetch('/places/search?keyword=' + keyword)
+            .then(response => response.json())
+            .then(data => {
+                markerGroup.clearLayers(); // 이전 마커 삭제
+
+                // 받은 장소 정보를 반복하여 마커로 지도에 추가
+                data.forEach(place => {
+                    var marker = L.marker([place.latitude, place.longitude]).addTo(markerGroup);
+                    marker.bindPopup(place.placeName);
+                });
+
+                // 검색된 장소가 있는 경우 지도 중심과 확대/축소 조정
+                if (data.length > 0) {
+                    var bounds = markerGroup.getBounds();
+                    map.fitBounds(bounds);
+                } else {
+                    // 검색된 장소가 없는 경우 메시지 표시 등 추가 처리
+                    console.log('검색된 장소가 없습니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+</body>
+</html>
