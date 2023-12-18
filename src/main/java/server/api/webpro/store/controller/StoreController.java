@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import server.api.webpro.store.dto.StoreRequest;
 import server.api.webpro.store.entity.Store;
 import server.api.webpro.store.service.StoreService;
 
@@ -19,8 +20,14 @@ public class StoreController {
     private final StoreService storeService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Store>> getAllStores() {
-        List<Store> stores = storeService.getAllStores();
+    public ResponseEntity<List<StoreRequest>> getAllStores() {
+        List<StoreRequest> stores = storeService.getAllStores();
+        return new ResponseEntity<>(stores, HttpStatus.OK);
+    }
+
+    @GetMapping("/near")
+    public ResponseEntity<List<StoreRequest>> getNearbyAllStores(@RequestParam double latitude,@RequestParam double longitude) {
+        List<StoreRequest> stores = storeService.getNearbyAllStores(latitude,longitude);
         return new ResponseEntity<>(stores, HttpStatus.OK);
     }
 

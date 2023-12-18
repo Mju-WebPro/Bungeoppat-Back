@@ -19,5 +19,6 @@ public class Store {
     private String storeName;
     private String operateTime;
     private String menu;
-
+    @OneToOne(mappedBy = "store", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true) //FK가 없는 쪽에 mappedBy 사용을 추천
+    private Place place = new Place();
 }
