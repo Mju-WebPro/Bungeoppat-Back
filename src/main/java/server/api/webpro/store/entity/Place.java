@@ -20,4 +20,8 @@ public class Place {
     private double latitude;
     private double longitude;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
 }

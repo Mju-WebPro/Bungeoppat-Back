@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import server.api.webpro.store.dto.StoreRequest;
 import server.api.webpro.store.entity.Store;
 import server.api.webpro.store.repository.StoreRepository;
 
@@ -15,8 +16,8 @@ import java.util.List;
 public class StoreService {
     private final StoreRepository storeRepository;
 
-    public List<Store> getAllStores() {
-        return storeRepository.findAll();
+    public List<StoreRequest> getAllStores() {
+        return storeRepository.findAllStore();
     }
 
     public Store getStoreById(Long id) {
@@ -29,5 +30,9 @@ public class StoreService {
 
     public void deleteStoreById(Long id) {
         storeRepository.deleteById(id);
+    }
+
+    public List<StoreRequest> getNearbyAllStores(double latitude,double longitude) {
+        return storeRepository.findNearbyStore(latitude,longitude);
     }
 }
