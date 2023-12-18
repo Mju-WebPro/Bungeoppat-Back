@@ -18,18 +18,11 @@ public class BoardController {
 
     private final BoardService boardService;
 
-
     @PostMapping("/board")
     public ApiResponse<Object> createBoard(@RequestBody BoardRequest boardRequest) {
         boardService.createBoard(boardRequest);
         return ApiResponse.of(BoardResponseType.CREATE_SUCCESS);
     }
-
-//    @PostMapping("/board/reply")
-//    public ApiResponse<Object> createReply(@RequestBody ReplyRequest replyRequest) {
-//        boardService.createReply(replyRequest);
-//        return ApiResponse.of(BoardResponseType.REPLY_SUCCESS);
-//    }
 
     @GetMapping("/board/all")
     public ApiResponse<List<BoardRetrieveResponse>> retrieveAllBoard() {
