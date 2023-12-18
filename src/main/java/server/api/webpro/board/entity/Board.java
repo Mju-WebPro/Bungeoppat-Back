@@ -3,9 +3,11 @@ package server.api.webpro.board.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import server.api.webpro.board.dto.BoardRequest;
+import server.api.webpro.reply.entity.Reply;
 import server.api.webpro.user.entity.User;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Setter
@@ -26,6 +28,9 @@ public class Board {
     private String title;
     private LocalDate date;
     private String content;
+
+    @OneToMany
+    private List<Reply> replies;
 
     public static Board of(BoardRequest boardRequest, User boardUser) {
         return Board.builder()

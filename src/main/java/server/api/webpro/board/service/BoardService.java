@@ -26,16 +26,9 @@ public class BoardService {
 
 
     public void createBoard(BoardRequest boardRequest) {
-        checkDuplicateBoard(boardRequest);
         User boardUser = userService.getUserById(boardRequest.getUserId());
         boardRepository.save(Board.notImage(boardRequest, boardUser));
     }
-
-//    public void createReply(ReplyRequest replyRequest) {
-//        Board targetBoard = boardRepository.getReferenceById(replyRequest.getBoardId());
-//        User replyUser = userService.getUserById(replyRequest.getUserId());
-//        targetBoard.setReply(replyRequest.getReply());
-//    }
 
     public List<BoardRetrieveResponse> retrieveBoard() {
         return boardRepository.findAll()
@@ -60,13 +53,12 @@ public class BoardService {
         targetBoard.update(boardUpdateRequest.getTitle(), boardUpdateRequest.getContent());
     }
 
-    private void checkDuplicateBoard(BoardRequest boardRequest) {
-//        if(boardRepository.existsBy)
-    }
-
     private void checkBoardExist(Long id) {
         boardRepository.findById(id).orElseThrow(() -> new NotFoundException("Board Not Found!"));
     }
 
 
+    public Board findById(Long boardId) {
+        return boardRepository.getReferenceById(boardId);
+    }
 }

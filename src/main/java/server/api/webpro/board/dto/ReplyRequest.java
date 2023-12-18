@@ -13,5 +13,5 @@ public class ReplyRequest {
 
     private Long boardId;
     private Long userId;
-    private String reply;
+    private String replyContent;
 }
