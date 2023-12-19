@@ -27,6 +27,7 @@ public class BoardService {
 
     public void createBoard(BoardRequest boardRequest) {
         User boardUser = userService.getUserById(boardRequest.getUserId());
+        System.out.println("User name " + boardUser.getName());
         boardRepository.save(Board.notImage(boardRequest, boardUser));
     }
 
