@@ -2,12 +2,9 @@ package server.api.webpro.userOrder.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import server.api.webpro.userOrder.dto.UserOrderCreateRequest;
-import server.api.webpro.userOrder.dto.UserOrderGetRequest;
+import server.api.webpro.userOrder.dto.*;
 import server.api.webpro.userOrder.entity.UserOrder;
 import server.api.webpro.userOrder.repository.UserOrderRepository;
-import server.api.webpro.userOrder.dto.StatusContentResponse;
-import server.api.webpro.userOrder.dto.UserOrderListResponse;
 import server.api.webpro.payment.entity.Payment;
 import server.api.webpro.payment.repository.PaymentRepository;
 import server.api.webpro.review.entity.Review;
@@ -18,6 +15,7 @@ import server.api.webpro.user.entity.User;
 import server.api.webpro.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,7 +42,7 @@ public class UserOrderService {
                     .quantity(request.getQuantity())
                     .price(request.getPrice())
                     .purchaseDate(LocalDateTime.now())
-                    .pickUpMinute(calculatorPickUp(request.getQuantity()))
+                    .pickUpMinute(request.getPickUpDate())
                     .status(0)
                     .build();
             UserOrder saveOrder = orderRepository.save(order);
@@ -56,12 +54,30 @@ public class UserOrderService {
 
     public UserOrderListResponse getAllOrders(Long userId){
         User user = userRepository.findById(userId).orElse(null);
+        List<OrderListDTO> orderListDTOS = new ArrayList<>();
         if(user != null){
             List<UserOrder> orders = orderRepository.findAllByUser(user);
             if(orders == null || orders.isEmpty()){
                 return new UserOrderListResponse(0, null);
             }
-            return new UserOrderListResponse(0, orders);
+            for(UserOrder userOrder : orders){
+                OrderListDTO orderListDTO = new OrderListDTO(
+                        userOrder.getStoreId().getId(),
+                        userOrder.getUserId().getId(),
+                        userOrder.getReviewId().getId(),
+                        userOrder.getPaymentId().getId(),
+                        userOrder.getQuantity(),
+                        userOrder.getPrice(),
+                        userOrder.getPurchaseDate(),
+                        userOrder.getPickUpMinute(),
+                        userOrder.getStatus(),
+                        userOrder.getStoreId().getStoreName(),
+                        userOrder.getReviewId().getContent(),
+                        userOrder.getReviewId().getStarRating()
+                );
+                orderListDTOS.add(orderListDTO);
+            }
+            return new UserOrderListResponse(0, orderListDTOS);
         }
         return new UserOrderListResponse(1, null);
     }

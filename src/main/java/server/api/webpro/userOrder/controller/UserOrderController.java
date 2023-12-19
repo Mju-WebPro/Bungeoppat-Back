@@ -19,9 +19,9 @@ public class UserOrderController {
 
     @PostMapping("/userOrder/createOrder")
     public ResponseEntity<StatusContentResponse> createOrder(@RequestBody UserOrderCreateRequest request){
-        log.info("createOrder : storeId = {}, userId = {}, reviewId = {}, paymentId = {}, quantity = {}, price = {}",
+        log.info("createOrder : storeId = {}, userId = {}, reviewId = {}, paymentId = {}, quantity = {}, price = {}, pickUpDate = {}",
                 request.getStoreId(), request.getUserId(), request.getReviewId(), request.getPaymentId(),
-                request.getQuantity(), request.getPrice());
+                request.getQuantity(), request.getPrice(), request.getPickUpDate());
         StatusContentResponse response = orderService.createOrder(request);
         return ResponseEntity.ok(response);
     }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import server.api.webpro.review.dto.StatusReviewResponse;
 import server.api.webpro.userOrder.dto.StatusContentResponse;
 import server.api.webpro.review.dto.ReviewWriteRequest;
 import server.api.webpro.review.service.ReviewService;
@@ -17,9 +18,9 @@ import server.api.webpro.review.service.ReviewService;
 public class ReviewController {
     private final ReviewService reviewService;
     @PostMapping("/review/createReview")
-    public ResponseEntity<StatusContentResponse> createReview(){
+    public ResponseEntity<StatusReviewResponse> createReview(){
         log.info("review/createReview");
-        StatusContentResponse response = reviewService.createReview();
+        StatusReviewResponse response = reviewService.createReview();
         return ResponseEntity.ok(response);
     }
 

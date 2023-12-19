@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import server.api.webpro.common.utill.ApiResponse;
 import server.api.webpro.user.dto.MyIdResponse;
+import server.api.webpro.user.dto.RegionRequest;
 import server.api.webpro.user.dto.UserCreateRequest;
 import server.api.webpro.user.dto.UserResponse;
 import server.api.webpro.user.service.UserAuthService;
@@ -55,5 +56,10 @@ public class UserController {
     @GetMapping(value = {"/myid"})
     public ApiResponse<MyIdResponse> myId() throws ParseException {
         return ApiResponse.of(UserResponseType.MYPAGE_LOAD_SUCCESS, userService.myId());
+    }
+
+    @PostMapping("/region")
+    public double setRegion(@RequestBody RegionRequest request) {
+        return userService.setRegion(request.getId(), request.getRegion());
     }
 }

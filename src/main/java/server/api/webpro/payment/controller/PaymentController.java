@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import server.api.webpro.payment.dto.PaymentCreateRequest;
 import server.api.webpro.payment.dto.StatusContentResponse;
+import server.api.webpro.payment.dto.StatusPaymentResponse;
 import server.api.webpro.payment.service.PaymentService;
 
 import java.io.IOException;
@@ -36,9 +37,9 @@ public class PaymentController{
 
     // 주문저장
     @PostMapping("/payment/createPayment")
-    public ResponseEntity<StatusContentResponse> createPayment(@RequestBody PaymentCreateRequest request){
+    public ResponseEntity<StatusPaymentResponse> createPayment(@RequestBody PaymentCreateRequest request){
         log.info("createPayment : storeId = {}, popFishNum = {}, suFishNum = {}", request.getStoreId(), request.getPopFishNum(), request.getSuFishNum());
-        StatusContentResponse response = paymentService.createPayment(request);
+        StatusPaymentResponse response = paymentService.createPayment(request);
         return ResponseEntity.ok(response);
     }
 

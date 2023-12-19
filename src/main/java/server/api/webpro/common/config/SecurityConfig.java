@@ -50,8 +50,7 @@ public class SecurityConfig {
                     try{auth
                                 .requestMatchers("/", "/auth/**","login/oauth2/code/google").permitAll()
                                 .requestMatchers( "/swagger-ui/**","/v3/**").permitAll()
-                                .anyRequest().permitAll()
-                        ;
+                                .anyRequest().permitAll();
                     }catch (Exception e){
                         e.printStackTrace();
                     }

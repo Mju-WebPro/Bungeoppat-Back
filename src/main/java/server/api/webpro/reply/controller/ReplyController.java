@@ -23,8 +23,8 @@ public class ReplyController {
     }
 
     @GetMapping("/reply/{board_id}")
-    public ApiResponse<List<ReplyRetrieveResponse>> retrieveReply(@PathVariable(name = "board_id") Long id) {
-        return ApiResponse.of(ReplyResponse.RETRIEVE_SUCCESS, replyService.retrieveReply(id));
+    public ApiResponse<List<ReplyRetrieveResponse>> retrieveReply(@PathVariable(name = "board_id") String id) {
+        return ApiResponse.of(ReplyResponse.RETRIEVE_SUCCESS, replyService.retrieveReply(Long.parseLong(id)));
     }
 
 }

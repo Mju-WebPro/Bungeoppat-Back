@@ -40,6 +40,12 @@ public class UserService {
                 .build();
     }
 
+    public double setRegion(Long id, double region) {
+        User targetUser = userRepository.findById(id).get();
+        targetUser.setRegion(region);
+        return targetUser.getRegion();
+    }
+
     public User getUserById(Long userId) {
         return userRepository.getReferenceById(userId);
     }
