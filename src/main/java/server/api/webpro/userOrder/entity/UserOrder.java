@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 import server.api.webpro.payment.entity.Payment;
 import server.api.webpro.review.entity.Review;
 import server.api.webpro.store.entity.Store;
@@ -16,11 +17,13 @@ import java.time.LocalDateTime;
 @Table(name = "userOrder")
 @IdClass(UserOrderId.class)
 public class UserOrder {
+    @JsonIgnore
     @Id
     @ManyToOne
     @JoinColumn(name = "Store_id")
     private Store storeId;
 
+    @JsonIgnore
     @Id
     @ManyToOne
     @JoinColumn(name = "user_id")

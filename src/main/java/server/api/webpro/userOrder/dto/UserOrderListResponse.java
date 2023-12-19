@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 public class UserOrderListResponse {
     private Integer status;
-    private List<UserOrder> orders;
+    private List<OrderListDTO> orders;
 }
 

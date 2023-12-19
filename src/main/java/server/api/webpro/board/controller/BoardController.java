@@ -30,8 +30,8 @@ public class BoardController {
     }
 
     @GetMapping("/board/{id}")
-    private ApiResponse<BoardDto> retrieveBoardById(@PathVariable Long id) {
-        return ApiResponse.of(BoardResponseType.RETRIEVEBYID_SUCCESS, boardService.retrieveBoardById(id));
+    private ApiResponse<BoardDto> retrieveBoardById(@PathVariable String id) {
+        return ApiResponse.of(BoardResponseType.RETRIEVEBYID_SUCCESS, boardService.retrieveBoardById(Long.parseLong(id)));
     }
 
     @PutMapping("/board/{board_id}")
