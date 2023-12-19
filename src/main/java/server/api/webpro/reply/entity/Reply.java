@@ -2,7 +2,7 @@ package server.api.webpro.reply.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import server.api.webpro.board.dto.ReplyRequest;
+import server.api.webpro.reply.dto.ReplyRequest;
 import server.api.webpro.board.entity.Board;
 import server.api.webpro.user.entity.User;
 
