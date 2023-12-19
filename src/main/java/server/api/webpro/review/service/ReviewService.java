@@ -23,7 +23,7 @@ public class ReviewService {
     }
 
     public StatusContentResponse writeReview(ReviewWriteRequest request){
-        reviewRepository.writeReview(request.getId(), request.getContent(), request.getStarRating());
+        reviewRepository.writeReview(request.getReviewId(), request.getContent(), request.getStarRating());
         return new StatusContentResponse(0, "success WriteReview");
     }
 }

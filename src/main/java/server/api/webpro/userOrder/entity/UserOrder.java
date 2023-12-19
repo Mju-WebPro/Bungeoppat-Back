@@ -17,22 +17,22 @@ import java.time.LocalDateTime;
 @IdClass(UserOrderId.class)
 public class UserOrder {
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "Store_id")
     private Store storeId;
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User userId;
 
     @Id
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "review_id")
     private Review reviewId;
 
     @Id
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment paymentId;
 
@@ -51,7 +51,7 @@ public class UserOrder {
 
     @Builder
     public UserOrder(Store storeId, User userId, Review reviewId, Payment paymentId, Integer quantity, Integer price,
-                 LocalDateTime purchaseDate, Integer pickUpMinute, Integer status){
+                     LocalDateTime purchaseDate, Integer pickUpMinute, Integer status){
         this.storeId = storeId;
         this.userId = userId;
         this.reviewId = reviewId;

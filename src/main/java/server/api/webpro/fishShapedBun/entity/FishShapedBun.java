@@ -14,6 +14,6 @@ public class FishShapedBun {
     private Integer price;
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
-    private Store store_id;
+    private Store storeId;
 
 }

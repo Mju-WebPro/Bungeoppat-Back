@@ -25,7 +25,7 @@ import java.util.List;
 public class UserOrderService {
     private final UserRepository userRepository;
     private final StoreRepository storeRepository;
-    private final UserOrderRepository userOrderRepository;
+    private final UserOrderRepository orderRepository;
     private final PaymentRepository paymentRepository;
     private final ReviewRepository reviewRepository;
 
@@ -47,18 +47,17 @@ public class UserOrderService {
                     .pickUpMinute(calculatorPickUp(request.getQuantity()))
                     .status(0)
                     .build();
-            UserOrder saveOrder = userOrderRepository.save(order);
+            UserOrder saveOrder = orderRepository.save(order);
             if(saveOrder != null) {return new StatusContentResponse(0, "success createOrder");}
-            return new StatusContentResponse(2, "Unexpected Error : failed createOrder");
-
+            return new StatusContentResponse(2, "Unexpected Error : failed createdOrder");
         }
         return new StatusContentResponse(1, "request's values invalid");
     }
 
-    public UserOrderListResponse getAllOrders(UserOrderGetRequest request){
-        User user = userRepository.findById(request.getUserId()).orElse(null);
+    public UserOrderListResponse getAllOrders(Long userId){
+        User user = userRepository.findById(userId).orElse(null);
         if(user != null){
-            List<UserOrder> orders = userOrderRepository.findAllByUser(user);
+            List<UserOrder> orders = orderRepository.findAllByUser(user);
             if(orders == null || orders.isEmpty()){
                 return new UserOrderListResponse(0, null);
             }
