@@ -29,8 +29,8 @@ public class BoardController {
         return ApiResponse.of(BoardResponseType.RETRIEVEALL_SUCCESS, boardService.retrieveBoard());
     }
 
-    @GetMapping("/board/one")
-    private ApiResponse<BoardDto> retrieveBoardById(@RequestParam Long id) {
+    @GetMapping("/board/{id}")
+    private ApiResponse<BoardDto> retrieveBoardById(@PathVariable Long id) {
         return ApiResponse.of(BoardResponseType.RETRIEVEBYID_SUCCESS, boardService.retrieveBoardById(id));
     }
 

@@ -2,13 +2,12 @@ package server.api.webpro.reply.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import server.api.webpro.board.dto.ReplyRequest;
+import server.api.webpro.reply.dto.ReplyRequest;
 import server.api.webpro.board.entity.Board;
 import server.api.webpro.board.service.BoardService;
 import server.api.webpro.reply.dto.ReplyRetrieveResponse;
 import server.api.webpro.reply.entity.Reply;
 import server.api.webpro.reply.repository.ReplyRepository;
-import server.api.webpro.reply.state.ReplyResponse;
 import server.api.webpro.user.entity.User;
 import server.api.webpro.user.service.UserService;
 
