@@ -1,4 +1,4 @@
-package server.api.webpro.board.dto;
+package server.api.webpro.reply.dto;
 
 
 import jakarta.persistence.Column;
