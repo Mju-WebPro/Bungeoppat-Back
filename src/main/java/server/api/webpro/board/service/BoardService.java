@@ -7,16 +7,12 @@ import org.hibernate.annotations.NotFound;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import server.api.webpro.board.dto.BoardDto;
-import server.api.webpro.board.dto.BoardRequest;
-import server.api.webpro.board.dto.BoardRetrieveResponse;
-import server.api.webpro.board.dto.BoardUpdateRequest;
+import server.api.webpro.board.dto.*;
 import server.api.webpro.board.entity.Board;
 import server.api.webpro.board.repository.BoardRepository;
 import server.api.webpro.user.entity.User;
 import server.api.webpro.user.service.UserService;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,18 +23,10 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final UserService userService;
-    private final S3UploadService s3UploadService;
 
-    public void createBoard(BoardRequest boardRequest, MultipartFile multipartFile) throws IOException {
-        checkDuplicateBoard(boardRequest);
-        String imageUrl = s3UploadService.saveFile(multipartFile);
-        User boardUser = userService.getUserById(boardRequest.getUserId());
-        boardRepository.save(Board.of(boardRequest, multipartFile, imageUrl, boardUser));
-    }
 
-    public void createBoardNotImage(BoardRequest boardRequest) {
-        checkDuplicateBoard(boardRequest);
-        User boardUser = userService.getUserById(boardRequest.getUserId());
+    public void createBoard(BoardRequest boardRequest) {
+        User boardUser = userService.getUserById(Long.parseLong(boardRequest.getUserId()));
         boardRepository.save(Board.notImage(boardRequest, boardUser));
     }
 
@@ -50,7 +38,6 @@ public class BoardService {
     public void deleteBoard(Long id) {
         checkBoardExist(id);
         Board targetBoard = boardRepository.getReferenceById(id);
-        s3UploadService.deleteImage(targetBoard.getFileName());
         boardRepository.delete(targetBoard);
     }
 
@@ -60,23 +47,18 @@ public class BoardService {
         return BoardDto.of(targetBoard);
     }
 
-    public void updateBoard(Long id, BoardUpdateRequest boardUpdateRequest) throws IOException {
+    public void updateBoard(Long id, BoardUpdateRequest boardUpdateRequest) {
         checkBoardExist(id);
         Board targetBoard = boardRepository.getReferenceById(id);
         targetBoard.update(boardUpdateRequest.getTitle(), boardUpdateRequest.getContent());
-        if(targetBoard.getFileName() != boardUpdateRequest.getMultipartFile().getOriginalFilename()) {
-            s3UploadService.deleteImage(targetBoard.getFileName());
-            String imageUrl = s3UploadService.saveFile(boardUpdateRequest.getMultipartFile());
-            targetBoard.updateImage(imageUrl);
-        }
-    }
-
-    private void checkDuplicateBoard(BoardRequest boardRequest) {
-//        if(boardRepository.existsBy)
     }
 
     private void checkBoardExist(Long id) {
         boardRepository.findById(id).orElseThrow(() -> new NotFoundException("Board Not Found!"));
     }
 
+
+    public Board findById(Long boardId) {
+        return boardRepository.getReferenceById(boardId);
+    }
 }

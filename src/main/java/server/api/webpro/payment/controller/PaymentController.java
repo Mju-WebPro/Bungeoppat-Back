@@ -12,13 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import server.api.webpro.payment.dto.PaymentCreateRequest;
 import server.api.webpro.payment.dto.StatusContentResponse;
+import server.api.webpro.payment.dto.StatusPaymentResponse;
 import server.api.webpro.payment.service.PaymentService;
 
 import java.io.IOException;
 
 @RestController
-//@Slf4j
-@RequestMapping("/payment")
+@Slf4j
 @RequiredArgsConstructor
 public class PaymentController{
     private IamportClient iamportClient;
@@ -36,19 +36,19 @@ public class PaymentController{
     }
 
     // 주문저장
-    @PostMapping("")
-    public ResponseEntity<StatusContentResponse> createPayment(@RequestBody PaymentCreateRequest request){
-//        log.info("createPayment : paidAmount = {}, payMethod = {}, status = {}, imp_uid = {}", request.getPaidAmount(), request.getPayMethod(), request.getStatus(), request.getImpUid());
-        StatusContentResponse response = paymentService.createPayment(request);
+    @PostMapping("/payment/createPayment")
+    public ResponseEntity<StatusPaymentResponse> createPayment(@RequestBody PaymentCreateRequest request){
+        log.info("createPayment : storeId = {}, popFishNum = {}, suFishNum = {}", request.getStoreId(), request.getPopFishNum(), request.getSuFishNum());
+        StatusPaymentResponse response = paymentService.createPayment(request);
         return ResponseEntity.ok(response);
     }
 
     // 주문검증
     @PostMapping("/validation/{imp_uid}")
     public IamportResponse<Payment> validateIamport(@PathVariable String imp_uid) throws IamportResponseException, IOException {
-//        log.info("validateIamport : imp_uid = {}", imp_uid);
+        log.info("validateIamport : imp_uid = {}", imp_uid);
         IamportResponse<Payment> payment = iamportClient.paymentByImpUid(imp_uid);
-//        log.info("결제 요청 응답, 주문 번호 = {}", payment.getResponse().getMerchantUid());
+        log.info("결제 요청 응답, 주문 번호 = {}", payment.getResponse().getMerchantUid());
         return payment;
     }
 }

@@ -2,7 +2,13 @@ package server.api.webpro.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import server.api.webpro.user.state.Role;
+import net.minidev.json.annotate.JsonIgnore;
+import server.api.webpro.reply.entity.Reply;
+import server.api.webpro.userOrder.entity.UserOrder;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -19,4 +25,12 @@ public class User {
     private String email;
     private String name;
     private Integer age;
+    private double region;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userId")
+    private List<UserOrder> userList = new ArrayList<>();
+
+    @OneToMany
+    private List<Reply> replies;
 }

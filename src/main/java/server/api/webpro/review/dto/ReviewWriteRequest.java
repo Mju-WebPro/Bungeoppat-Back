@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class ReviewWriteRequest {
-    private Long id;
+    private Long reviewId;
     private String content;
     private Float starRating;
 }

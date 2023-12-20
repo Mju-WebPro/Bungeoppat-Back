@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 import server.api.webpro.payment.entity.Payment;
 import server.api.webpro.review.entity.Review;
 import server.api.webpro.store.entity.Store;
@@ -16,23 +17,25 @@ import java.time.LocalDateTime;
 @Table(name = "userOrder")
 @IdClass(UserOrderId.class)
 public class UserOrder {
+    @JsonIgnore
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "Store_id")
     private Store storeId;
 
+    @JsonIgnore
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User userId;
 
     @Id
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "review_id")
     private Review reviewId;
 
     @Id
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment paymentId;
 
@@ -51,7 +54,7 @@ public class UserOrder {
 
     @Builder
     public UserOrder(Store storeId, User userId, Review reviewId, Payment paymentId, Integer quantity, Integer price,
-                 LocalDateTime purchaseDate, Integer pickUpMinute, Integer status){
+                     LocalDateTime purchaseDate, Integer pickUpMinute, Integer status){
         this.storeId = storeId;
         this.userId = userId;
         this.reviewId = reviewId;

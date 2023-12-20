@@ -3,10 +3,7 @@ package server.api.webpro.board.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import server.api.webpro.board.dto.BoardDto;
-import server.api.webpro.board.dto.BoardRequest;
-import server.api.webpro.board.dto.BoardRetrieveResponse;
-import server.api.webpro.board.dto.BoardUpdateRequest;
+import server.api.webpro.board.dto.*;
 import server.api.webpro.board.entity.Board;
 import server.api.webpro.board.service.BoardService;
 import server.api.webpro.board.state.BoardResponseType;
@@ -22,15 +19,8 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping("/board")
-    private ApiResponse<Object> createBoard(@RequestPart("boardRequest") BoardRequest boardRequest,
-                                            @RequestPart("multipartFile") MultipartFile multipartFile) throws IOException {
-        boardService.createBoard(boardRequest, multipartFile);
-        return ApiResponse.of(BoardResponseType.CREATE_SUCCESS);
-    }
-
-    @PostMapping("/board/notImage")
-    public ApiResponse<Object> createBoardNotImage(@RequestBody BoardRequest boardRequest) {
-        boardService.createBoardNotImage(boardRequest);
+    public ApiResponse<Object> createBoard(@RequestBody BoardRequest boardRequest) {
+        boardService.createBoard(boardRequest);
         return ApiResponse.of(BoardResponseType.CREATE_SUCCESS);
     }
 
@@ -39,14 +29,14 @@ public class BoardController {
         return ApiResponse.of(BoardResponseType.RETRIEVEALL_SUCCESS, boardService.retrieveBoard());
     }
 
-    @GetMapping("/board/one")
-    private ApiResponse<BoardDto> retrieveBoardById(@RequestParam Long id) {
-        return ApiResponse.of(BoardResponseType.RETRIEVEBYID_SUCCESS, boardService.retrieveBoardById(id));
+    @GetMapping("/board/{id}")
+    private ApiResponse<BoardDto> retrieveBoardById(@PathVariable String id) {
+        return ApiResponse.of(BoardResponseType.RETRIEVEBYID_SUCCESS, boardService.retrieveBoardById(Long.parseLong(id)));
     }
 
     @PutMapping("/board/{board_id}")
     private ApiResponse<Object> updateBoard(@PathVariable(value = "board_id") Long id,
-                                            @ModelAttribute BoardUpdateRequest boardUpdateRequest) throws IOException {
+                                            @ModelAttribute BoardUpdateRequest boardUpdateRequest) {
         boardService.updateBoard(id, boardUpdateRequest);
         return ApiResponse.of(BoardResponseType.UPDATE_SUCCESS);
     }
